@@ -14,7 +14,7 @@ X_test = sc.transform(data_test[:, :2])
 
 clf = MLPClassifier(
     verbose=True,
-    hidden_layer_sizes=(100),
+    hidden_layer_sizes=(10),
     alpha=1.0e-8,
     max_iter=1000)
 
