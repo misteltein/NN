@@ -17,12 +17,22 @@ X_test = sc.transform(data_test[:, :2])
 def tpl(length,num):
     return tuple([length]*num)
 
+best_score = 0.0
+best_size  = 0
+best_layer = 0
+
+print('score','size','layer')
 for size in range (10,210,10):
     for layer in range (1,11,1):
         clf = MLPClassifier(hidden_layer_sizes=tpl(size,layer),alpha=1.0e-8,max_iter=1000)
         clf.fit( X_train, y_train )
         y_hat = clf.predict(X_train)
-        print(size,layer,clf.score(X_train, y_train))
+        score = clf.score(X_train, y_train)
+        if best_score< score:
+            best_score = score
+            best_size = size
+            best_layer = layer
+        print(score,size,layer)
         
         fig = plt.figure()
         ax = fig.add_subplot()
@@ -31,4 +41,6 @@ for size in range (10,210,10):
         plt.clf()
         plt.close()
 
+print('best_score','best_size','best_layer')
+print(best_score,best_size,best_layer)
 
